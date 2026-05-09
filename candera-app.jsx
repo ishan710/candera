@@ -343,6 +343,8 @@ function Footer() {
     <footer className="ftr" id="contact">
       <div className="ftr-mark">Candera</div>
       <div>
+        <a href="agent.html">What we do</a>
+        <span aria-hidden="true"> · </span>
         <a href="mailto:hello@candera.co">hello@candera.co</a>
       </div>
       <div className="ftr-meta" style={{ textAlign: "right" }}>
