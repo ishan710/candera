@@ -1,8 +1,8 @@
 *
-!candera/
-!candera/**
 !.gitignore
 !vercel.json
+!README.md
+!agent.html
 !index.html
 !styles.css
 !candera-app.jsx
