@@ -2,3 +2,4 @@
 !candera/
 !candera/**
 !.gitignore
+!vercel.json
