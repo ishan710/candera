@@ -106,8 +106,9 @@ a:focus-visible {
 }
 .hdr nav a:hover::after { transform: scaleX(1); }
 @media (max-width: 760px) {
-  .hdr nav { gap: 18px; font-size: 12px; }
+  .hdr { flex-wrap: wrap; gap: 12px; padding: 20px 0 16px; }
   .hdr .wordmark { font-size: 22px; }
+  .hdr nav { display: none; }
 }
 
 /* ── Eyebrow / mono label ───────────────────────────────────────── */
@@ -123,6 +124,9 @@ a:focus-visible {
 .hero {
   padding: 110px 0 90px;
   border-bottom: 1px solid var(--rule);
+}
+@media (max-width: 760px) {
+  .hero { padding: 48px 0 56px; }
 }
 .hero .eyebrow { margin-bottom: 36px; display: block; }
 .hero h1 {
