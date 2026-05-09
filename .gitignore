@@ -3,3 +3,8 @@
 !candera/**
 !.gitignore
 !vercel.json
+!index.html
+!styles.css
+!candera-app.jsx
+!candera-tree.jsx
+!tweaks-panel.jsx
