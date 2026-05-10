@@ -21,7 +21,7 @@ The main interactive page (`/`) is editorial positioning and may use tone and em
 
 - Candera is an advisory practice helping **small businesses and teams** apply AI **without** pushing unnecessary tools.
 - Practice areas include **AI strategy**, **education** (workshops / seminars), **custom development**, **free playbooks**, **design review** of AI product surfaces, and **talent / hiring** support for early AI roles.
-- **Free office hours** (~30 minutes): booking via **https://calendly.com/candera** (described on-site as no pitch, no obligation to buy).
+- **Free office hours** (~30 minutes): booking via **https://calendly.com/ishan710** (described on-site as no pitch, no obligation to buy).
 - **Candera LLC**, New York. Contact: **hello@candera.co**
 
 ## Citation

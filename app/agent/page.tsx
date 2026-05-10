@@ -90,8 +90,8 @@ export default function AgentPage() {
               <div>
                 <p>Book via Calendly; described as no pitch and no obligation to buy.</p>
                 <p style={{ marginTop: 14 }}>
-                  <a href="https://calendly.com/candera" rel="noopener">
-                    Book — calendly.com/candera
+                  <a href="https://calendly.com/ishan710" rel="noopener">
+                    Book — calendly.com/ishan710
                   </a>
                 </p>
               </div>

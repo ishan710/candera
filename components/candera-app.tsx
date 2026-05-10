@@ -264,8 +264,8 @@ function OfficeHours() {
             Book a call. Ask us anything about AI for your business.
             No pitch. No follow-up.
           </p>
-          <a className="calendly" href="https://calendly.com/candera" rel="noopener">
-            Book a slot — calendly.com/candera →
+          <a className="calendly" href="https://calendly.com/ishan710" rel="noopener">
+            Book a slot — calendly.com/ishan710 →
           </a>
           <dl className="meta-block">
             <div><dt>When</dt><dd>Tuesdays & Thursdays, 2–5pm ET</dd></div>
