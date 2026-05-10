@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import {
   Newsreader,
   Inter,
@@ -78,13 +80,13 @@ const figtree = Figtree({
   display: 'swap',
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Candera — Applied AI for everyone else.',
   description:
     'Candera is an advisory firm helping small businesses use AI well. Free playbooks, open office hours.',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   const fontVars = [
     newsreader.variable,
     inter.variable,

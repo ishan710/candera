@@ -1,6 +1,18 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+  type ReactNode,
+  type MouseEvent as ReactMouseEvent,
+} from 'react';
+
+interface DeckStageHTMLElement extends HTMLElement {
+  _railEnabled?: boolean;
+}
 
 const __TWEAKS_STYLE = `
   .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
@@ -81,13 +93,16 @@ const __TWEAKS_STYLE = `
     filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
 `;
 
-export function useTweaks(defaults) {
-  const [values, setValues] = useState(defaults);
-  const setTweak = useCallback((keyOrEdits, val) => {
-    const edits =
+export function useTweaks<T extends object>(defaults: T): [
+  T,
+  (keyOrEdits: keyof T | Partial<T>, val?: T[keyof T]) => void,
+] {
+  const [values, setValues] = useState<T>(defaults);
+  const setTweak = useCallback((keyOrEdits: keyof T | Partial<T>, val?: T[keyof T]) => {
+    const edits: Partial<T> =
       typeof keyOrEdits === 'object' && keyOrEdits !== null
-        ? keyOrEdits
-        : { [keyOrEdits]: val };
+        ? (keyOrEdits as Partial<T>)
+        : ({ [keyOrEdits as string]: val } as Partial<T>);
     setValues((prev) => ({ ...prev, ...edits }));
     window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
     window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
@@ -95,19 +110,30 @@ export function useTweaks(defaults) {
   return [values, setTweak];
 }
 
-export function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
+export function TweaksPanel({
+  title = 'Tweaks',
+  noDeckControls = false,
+  children,
+}: {
+  title?: string;
+  noDeckControls?: boolean;
+  children?: ReactNode;
+}) {
   const [open, setOpen] = useState(false);
-  const dragRef = useRef(null);
+  const dragRef = useRef<HTMLDivElement | null>(null);
   const hasDeckStage = useMemo(
-    () => typeof document !== 'undefined' && !!document.querySelector('deck-stage'),
+    () =>
+      typeof document !== 'undefined' &&
+      !!document.querySelector<DeckStageHTMLElement>('deck-stage'),
     [],
   );
   const [railEnabled, setRailEnabled] = useState(
-    () => hasDeckStage && !!document.querySelector('deck-stage')?._railEnabled,
+    () =>
+      hasDeckStage && !!document.querySelector<DeckStageHTMLElement>('deck-stage')?._railEnabled,
   );
   useEffect(() => {
     if (!hasDeckStage || railEnabled) return undefined;
-    const onMsg = (e) => {
+    const onMsg = (e: MessageEvent) => {
       if (e.data && e.data.type === '__omelette_rail_enabled') setRailEnabled(true);
     };
     window.addEventListener('message', onMsg);
@@ -116,7 +142,7 @@ export function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children
   const [railVisible, setRailVisible] = useState(() => {
     try { return localStorage.getItem('deck-stage.railVisible') !== '0'; } catch (e) { return true; }
   });
-  const toggleRail = (on) => {
+  const toggleRail = (on: boolean) => {
     setRailVisible(on);
     window.postMessage({ type: '__deck_rail_visible', on }, '*');
   };
@@ -150,7 +176,7 @@ export function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children
   }, [open, clampToViewport]);
 
   useEffect(() => {
-    const onMsg = (e) => {
+    const onMsg = (e: MessageEvent) => {
       const t = e?.data?.type;
       if (t === '__activate_edit_mode') setOpen(true);
       else if (t === '__deactivate_edit_mode') setOpen(false);
@@ -165,14 +191,14 @@ export function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children
     window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
   };
 
-  const onDragStart = (e) => {
+  const onDragStart = (e: ReactMouseEvent<HTMLDivElement>) => {
     const panel = dragRef.current;
     if (!panel) return;
     const r = panel.getBoundingClientRect();
     const sx = e.clientX, sy = e.clientY;
     const startRight = window.innerWidth - r.right;
     const startBottom = window.innerHeight - r.bottom;
-    const move = (ev) => {
+    const move = (ev: MouseEvent) => {
       offsetRef.current = {
         x: startRight - (ev.clientX - sx),
         y: startBottom - (ev.clientY - sy),
@@ -219,7 +245,7 @@ export function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children
   );
 }
 
-export function TweakSection({ label, children }) {
+export function TweakSection({ label, children }: { label: string; children?: ReactNode }) {
   return (
     <>
       <div className="twk-sect">{label}</div>
@@ -228,7 +254,17 @@ export function TweakSection({ label, children }) {
   );
 }
 
-export function TweakRow({ label, value, children, inline = false }) {
+export function TweakRow({
+  label,
+  value,
+  children,
+  inline = false,
+}: {
+  label: string;
+  value?: ReactNode;
+  children?: ReactNode;
+  inline?: boolean;
+}) {
   return (
     <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
       <div className="twk-lbl">
@@ -240,7 +276,23 @@ export function TweakRow({ label, value, children, inline = false }) {
   );
 }
 
-export function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+export function TweakSlider({
+  label,
+  value,
+  min = 0,
+  max = 100,
+  step = 1,
+  unit = '',
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min?: number;
+  max?: number;
+  step?: number;
+  unit?: string;
+  onChange: (v: number) => void;
+}) {
   return (
     <TweakRow label={label} value={`${value}${unit}`}>
       <input
@@ -254,7 +306,15 @@ export function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit =
   );
 }
 
-export function TweakToggle({ label, value, onChange }) {
+export function TweakToggle({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
     <div className="twk-row twk-row-h">
       <div className="twk-lbl"><span>{label}</span></div>
@@ -270,38 +330,54 @@ export function TweakToggle({ label, value, onChange }) {
   );
 }
 
-export function TweakRadio({ label, value, options, onChange }) {
-  const trackRef = useRef(null);
+type RadioOption = string | { value: string; label: string };
+
+export function TweakRadio<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T;
+  options: readonly RadioOption[];
+  onChange: (v: T) => void;
+}) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState(false);
   const valueRef = useRef(value);
   valueRef.current = value;
 
-  const labelLen = (o) => String(typeof o === 'object' ? o.label : o).length;
+  const labelLen = (o: RadioOption) => String(typeof o === 'object' ? o.label : o).length;
   const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
   const fitsAsSegments = maxLen <= ({ 2: 16, 3: 10 }[options.length] ?? 0);
   if (!fitsAsSegments) {
-    const resolve = (s) => {
+    const resolve = (s: string): T => {
       const m = options.find((o) => String(typeof o === 'object' ? o.value : o) === s);
-      return m === undefined ? s : typeof m === 'object' ? m.value : m;
+      return (m === undefined ? s : typeof m === 'object' ? m.value : m) as T;
     };
-    return <TweakSelect label={label} value={value} options={options} onChange={(s) => onChange(resolve(s))} />;
+    return (
+      <TweakSelect label={label} value={value} options={options} onChange={(s) => onChange(resolve(s))} />
+    );
   }
   const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
   const idx = Math.max(0, opts.findIndex((o) => o.value === value));
   const n = opts.length;
 
-  const segAt = (clientX) => {
-    const r = trackRef.current.getBoundingClientRect();
+  const segAt = (clientX: number): T => {
+    const tr = trackRef.current;
+    if (!tr) return opts[0]!.value as T;
+    const r = tr.getBoundingClientRect();
     const inner = r.width - 4;
     const i = Math.floor(((clientX - r.left - 2) / inner) * n);
-    return opts[Math.max(0, Math.min(n - 1, i))].value;
+    return opts[Math.max(0, Math.min(n - 1, i))]!.value as T;
   };
 
-  const onPointerDown = (e) => {
+  const onPointerDown = (e: ReactMouseEvent<HTMLDivElement>) => {
     setDragging(true);
     const v0 = segAt(e.clientX);
     if (v0 !== valueRef.current) onChange(v0);
-    const move = (ev) => {
+    const move = (ev: MouseEvent) => {
       if (!trackRef.current) return;
       const v = segAt(ev.clientX);
       if (v !== valueRef.current) onChange(v);
@@ -340,21 +416,45 @@ export function TweakRadio({ label, value, options, onChange }) {
   );
 }
 
-export function TweakSelect({ label, value, options, onChange }) {
+export function TweakSelect<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T;
+  options: readonly RadioOption[];
+  onChange: (v: T) => void;
+}) {
   return (
     <TweakRow label={label}>
-      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value as T)}>
         {options.map((o) => {
           const v = typeof o === 'object' ? o.value : o;
           const l = typeof o === 'object' ? o.label : o;
-          return <option key={v} value={v}>{l}</option>;
+          return (
+            <option key={v} value={v}>
+              {l}
+            </option>
+          );
         })}
       </select>
     </TweakRow>
   );
 }
 
-export function TweakText({ label, value, placeholder, onChange }) {
+export function TweakText({
+  label,
+  value,
+  placeholder,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  placeholder?: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <TweakRow label={label}>
       <input
@@ -368,18 +468,34 @@ export function TweakText({ label, value, placeholder, onChange }) {
   );
 }
 
-export function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
-  const clamp = (n) => {
+export function TweakNumber({
+  label,
+  value,
+  min,
+  max,
+  step = 1,
+  unit = '',
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min?: number;
+  max?: number;
+  step?: number;
+  unit?: string;
+  onChange: (v: number) => void;
+}) {
+  const clamp = (n: number) => {
     if (min != null && n < min) return min;
     if (max != null && n > max) return max;
     return n;
   };
   const startRef = useRef({ x: 0, val: 0 });
-  const onScrubStart = (e) => {
+  const onScrubStart = (e: ReactMouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
     startRef.current = { x: e.clientX, val: value };
     const decimals = (String(step).split('.')[1] || '').length;
-    const move = (ev) => {
+    const move = (ev: MouseEvent) => {
       const dx = ev.clientX - startRef.current.x;
       const raw = startRef.current.val + dx * step;
       const snapped = Math.round(raw / step) * step;
@@ -394,11 +510,15 @@ export function TweakNumber({ label, value, min, max, step = 1, unit = '', onCha
   };
   return (
     <div className="twk-num">
-      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>
+        {label}
+      </span>
       <input
         type="number"
         value={value}
-        min={min} max={max} step={step}
+        min={min}
+        max={max}
+        step={step}
         onChange={(e) => onChange(clamp(Number(e.target.value)))}
       />
       {unit && <span className="twk-num-unit">{unit}</span>}
@@ -406,35 +526,59 @@ export function TweakNumber({ label, value, min, max, step = 1, unit = '', onCha
   );
 }
 
-function isLight(hex) {
+function isLight(hex: string) {
   const h = String(hex).replace('#', '');
   const x = h.length === 3 ? h.replace(/./g, (c) => c + c) : h.padEnd(6, '0');
   const n = parseInt(x.slice(0, 6), 16);
   if (Number.isNaN(n)) return true;
-  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  const r = (n >> 16) & 255;
+  const g = (n >> 8) & 255;
+  const b = n & 255;
   return r * 299 + g * 587 + b * 114 > 148000;
 }
 
-function TwkCheck({ light }) {
+function TwkCheck({ light }: { light: boolean }) {
   return (
     <svg viewBox="0 0 14 14" aria-hidden="true">
-      <path d="M3 7.2 5.8 10 11 4.2" fill="none" strokeWidth="2.2"
-        strokeLinecap="round" strokeLinejoin="round"
-        stroke={light ? 'rgba(0,0,0,.78)' : '#fff'} />
+      <path
+        d="M3 7.2 5.8 10 11 4.2"
+        fill="none"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        stroke={light ? 'rgba(0,0,0,.78)' : '#fff'}
+      />
     </svg>
   );
 }
 
-export function TweakColor({ label, value, options, onChange }) {
+export function TweakColor({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string | string[];
+  options?: readonly (string | string[])[];
+  onChange: (v: string | string[]) => void;
+}) {
   if (!options || !options.length) {
     return (
       <div className="twk-row twk-row-h">
-        <div className="twk-lbl"><span>{label}</span></div>
-        <input type="color" className="twk-swatch" value={value} onChange={(e) => onChange(e.target.value)} />
+        <div className="twk-lbl">
+          <span>{label}</span>
+        </div>
+        <input
+          type="color"
+          className="twk-swatch"
+          value={typeof value === 'string' ? value : value[0]}
+          onChange={(e) => onChange(e.target.value)}
+        />
       </div>
     );
   }
-  const key = (o) => String(JSON.stringify(o)).toLowerCase();
+  const key = (o: string | string[]) => String(JSON.stringify(o)).toLowerCase();
   const cur = key(value);
   return (
     <TweakRow label={label}>
@@ -443,24 +587,28 @@ export function TweakColor({ label, value, options, onChange }) {
           const colors = Array.isArray(o) ? o : [o];
           const [hero, ...rest] = colors;
           const sup = rest.slice(0, 4);
-          const on = key(o) === cur;
+          const onChip = key(o) === cur;
           return (
             <button
               key={i}
               type="button"
               className="twk-chip"
               role="radio"
-              aria-checked={on}
-              data-on={on ? '1' : '0'}
+              aria-checked={onChip}
+              data-on={onChip ? '1' : '0'}
               aria-label={colors.join(', ')}
               title={colors.join(' · ')}
               style={{ background: hero }}
               onClick={() => onChange(o)}
             >
               {sup.length > 0 && (
-                <span>{sup.map((c, j) => <i key={j} style={{ background: c }} />)}</span>
+                <span>
+                  {sup.map((c, j) => (
+                    <i key={j} style={{ background: c }} />
+                  ))}
+                </span>
               )}
-              {on && <TwkCheck light={isLight(hero)} />}
+              {onChip && <TwkCheck light={isLight(hero)} />}
             </button>
           );
         })}
@@ -469,12 +617,18 @@ export function TweakColor({ label, value, options, onChange }) {
   );
 }
 
-export function TweakButton({ label, onClick, secondary = false }) {
+export function TweakButton({
+  label,
+  onClick,
+  secondary = false,
+}: {
+  label: string;
+  onClick: () => void;
+  secondary?: boolean;
+}) {
   return (
-    <button
-      type="button"
-      className={secondary ? 'twk-btn secondary' : 'twk-btn'}
-      onClick={onClick}
-    >{label}</button>
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'} onClick={onClick}>
+      {label}
+    </button>
   );
 }
