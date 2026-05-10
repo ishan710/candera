@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { GET_IN_TOUCH_MAILTO } from '@/lib/contact';
 
 const RESOURCES = [
   // ── TIER 1: Non-Technical / Business ──
@@ -314,6 +315,7 @@ export default function CanderaResources() {
         <nav aria-label="primary">
           <a href="/">Full site</a>
           <a href="/resources">Resources</a>
+          <a href={GET_IN_TOUCH_MAILTO}>Get in touch</a>
           <a href="mailto:hello@candera.co">hello@candera.co</a>
         </nav>
       </header>

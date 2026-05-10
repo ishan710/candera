@@ -13,6 +13,7 @@ import {
   TweakToggle,
 } from './tweaks-panel';
 import { TREE_BRANCHES, AUDIENCES, PLAYBOOKS } from './data';
+import { GET_IN_TOUCH_MAILTO } from '@/lib/contact';
 
 const TYPE_PAIRS = {
   'newsreader-inter': {
@@ -64,6 +65,7 @@ function Header() {
         <a href="#playbooks">Playbooks</a>
         <a href="#office-hours">Office Hours</a>
         <a href="/resources">Resources</a>
+        <a href={GET_IN_TOUCH_MAILTO}>Get in touch</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -310,6 +312,8 @@ function Footer() {
       <div className="ftr-mark">Candera</div>
       <div>
         <a href="/agent">What we do</a>
+        <span aria-hidden="true"> · </span>
+        <a href={GET_IN_TOUCH_MAILTO}>Get in touch</a>
         <span aria-hidden="true"> · </span>
         <a href="mailto:hello@candera.co">hello@candera.co</a>
       </div>

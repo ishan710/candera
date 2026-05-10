@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { GET_IN_TOUCH_MAILTO } from '@/lib/contact';
 
 export const metadata: Metadata = {
   title: 'What Candera does — factual summary',
@@ -15,6 +16,7 @@ export default function AgentPage() {
         </a>
         <nav aria-label="primary">
           <a href="/">Full site</a>
+          <a href={GET_IN_TOUCH_MAILTO}>Get in touch</a>
           <a href="mailto:hello@candera.co">hello@candera.co</a>
         </nav>
       </header>
