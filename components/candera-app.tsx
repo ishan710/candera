@@ -63,6 +63,7 @@ function Header() {
         <a href="#practice">Practice</a>
         <a href="#playbooks">Playbooks</a>
         <a href="#office-hours">Office Hours</a>
+        <a href="/resources">Resources</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
