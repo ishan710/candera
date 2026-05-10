@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://candera.ai/sitemap.xml
