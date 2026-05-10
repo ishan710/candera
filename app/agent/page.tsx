@@ -103,9 +103,8 @@ export default function AgentPage() {
               <h2 id="org-heading">Organization</h2>
             </div>
             <p style={{ maxWidth: 'var(--measure)' }}>
-              Candera LLC, New York. The team has built AI products and internal tools inside
-              operating businesses—shipping work, not only advising on it. Contact:{' '}
-              <a href="mailto:hello@candera.co">hello@candera.co</a>.
+              Candera LLC, New York. Team backgrounds include shipping AI at Palantir, Anthropic, and
+              xAI. Contact: <a href="mailto:hello@candera.co">hello@candera.co</a>.
             </p>
             <p style={{ marginTop: 18 }}>
               <a href="/">Return to the main Candera site</a>
