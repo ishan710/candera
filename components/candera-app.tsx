@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { TreeOfKnowledge } from './candera-tree';
+import type { TreeVariant } from './candera-tree';
 import {
   useTweaks,
   TweaksPanel,
@@ -12,14 +13,6 @@ import {
   TweakToggle,
 } from './tweaks-panel';
 import { TREE_BRANCHES, AUDIENCES, PLAYBOOKS } from './data';
-
-const TWEAK_DEFAULTS = {
-  treeStyle: 'botanical',
-  typePair: 'newsreader-inter',
-  accent: '#B85A2C',
-  showPlate: true,
-  denseLayout: false,
-};
 
 const TYPE_PAIRS = {
   'newsreader-inter': {
@@ -42,6 +35,24 @@ const TYPE_PAIRS = {
     sans: 'var(--font-figtree), -apple-system, sans-serif',
     label: 'Source Serif / Figtree',
   },
+} as const;
+
+type TypePairKey = keyof typeof TYPE_PAIRS;
+
+interface CanderaTweakState {
+  treeStyle: TreeVariant;
+  typePair: TypePairKey;
+  accent: string;
+  showPlate: boolean;
+  denseLayout: boolean;
+}
+
+const TWEAK_DEFAULTS: CanderaTweakState = {
+  treeStyle: 'botanical',
+  typePair: 'newsreader-inter',
+  accent: '#B85A2C',
+  showPlate: true,
+  denseLayout: false,
 };
 
 function Header() {
@@ -70,7 +81,13 @@ function Hero() {
   );
 }
 
-function TreePanel({ activeId, hoveredId }) {
+function TreePanel({
+  activeId,
+  hoveredId,
+}: {
+  activeId: string | null;
+  hoveredId: string | null;
+}) {
   const id = activeId || hoveredId;
   const branch = TREE_BRANCHES.find((b) => b.id === id);
 
@@ -111,9 +128,9 @@ function TreePanel({ activeId, hoveredId }) {
   );
 }
 
-function TreeSection({ variant }) {
-  const [hovered, setHovered] = useState(null);
-  const [active, setActive] = useState(null);
+function TreeSection({ variant }: { variant: TreeVariant }) {
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [active, setActive] = useState<string | null>(null);
 
   return (
     <section className="tree-section" id="practice-tree">
@@ -136,7 +153,7 @@ function TreeSection({ variant }) {
 
 function Audiences() {
   const [active, setActive] = useState(0);
-  const sceneRefs = useRef([]);
+  const sceneRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -146,7 +163,8 @@ function Audiences() {
         const top = visible.reduce((a, b) =>
           a.intersectionRatio > b.intersectionRatio ? a : b
         );
-        setActive(Number(top.target.dataset.idx));
+        const idx = (top.target as HTMLElement).dataset.idx;
+        if (idx !== undefined) setActive(Number(idx));
       },
       { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.5, 1] }
     );
@@ -179,7 +197,9 @@ function Audiences() {
           <div
             key={a.no}
             data-idx={i}
-            ref={(el) => (sceneRefs.current[i] = el)}
+            ref={(el) => {
+              sceneRefs.current[i] = el;
+            }}
             className="aud-scene"
           />
         ))}
@@ -301,7 +321,13 @@ function Footer() {
   );
 }
 
-function CanderaTweaks({ tweaks, setTweak }) {
+function CanderaTweaks({
+  tweaks,
+  setTweak,
+}: {
+  tweaks: CanderaTweakState;
+  setTweak: ReturnType<typeof useTweaks<CanderaTweakState>>[1];
+}) {
   return (
     <TweaksPanel>
       <TweakSection label="Identity" />
@@ -314,15 +340,17 @@ function CanderaTweaks({ tweaks, setTweak }) {
       <TweakSelect
         label="Type pairing"
         value={tweaks.typePair}
-        options={Object.keys(TYPE_PAIRS)}
-        renderOption={(k) => TYPE_PAIRS[k].label}
+        options={(Object.keys(TYPE_PAIRS) as TypePairKey[]).map((k) => ({
+          value: k,
+          label: TYPE_PAIRS[k].label,
+        }))}
         onChange={(v) => setTweak('typePair', v)}
       />
       <TweakColor
         label="Accent"
         value={tweaks.accent}
         options={['#B85A2C', '#1A1A18', '#3E5E3A', '#2E4A6B']}
-        onChange={(v) => setTweak('accent', v)}
+        onChange={(v) => setTweak('accent', Array.isArray(v) ? v[0]! : v)}
       />
       <TweakSection label="Layout" />
       <TweakToggle
@@ -340,8 +368,8 @@ function CanderaTweaks({ tweaks, setTweak }) {
 }
 
 export default function CanderaApp() {
-  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const pair = TYPE_PAIRS[tweaks.typePair] || TYPE_PAIRS['newsreader-inter'];
+  const [tweaks, setTweak] = useTweaks<CanderaTweakState>(TWEAK_DEFAULTS);
+  const pair = TYPE_PAIRS[tweaks.typePair];
 
   useEffect(() => {
     const r = document.documentElement;

@@ -1,16 +1,21 @@
 'use client';
 
+import type { KeyboardEvent } from 'react';
 import { TREE_BRANCHES, TREE_ROOTS, TRUNK_MAIN, TRUNK_HATCH_LEFT, TRUNK_HATCH_RIGHT } from './data';
 
 const TREE_W = 1200;
 const TREE_H = 800;
 
-function leafPath(cx, cy, angleDeg, length, plumpness = 1) {
+export type TreeVariant = 'botanical' | 'blueprint' | 'minimal';
+
+function leafPath(cx: number, cy: number, angleDeg: number, length: number, plumpness = 1) {
   const rad = (angleDeg * Math.PI) / 180;
-  const cos = Math.cos(rad), sin = Math.sin(rad);
+  const cos = Math.cos(rad);
+  const sin = Math.sin(rad);
   const tipX = cx + length * cos;
   const tipY = cy + length * sin;
-  const pX = -sin, pY = cos;
+  const pX = -sin;
+  const pY = cos;
   const half = length * 0.32 * plumpness;
   const c1x = cx + length * 0.3 * cos + half * pX;
   const c1y = cy + length * 0.3 * sin + half * pY;
@@ -23,23 +28,58 @@ function leafPath(cx, cy, angleDeg, length, plumpness = 1) {
   return `M ${cx} ${cy} C ${c1x} ${c1y} ${c2x} ${c2y} ${tipX} ${tipY} C ${c3x} ${c3y} ${c4x} ${c4y} ${cx} ${cy}`;
 }
 
-function getTreeStyle(variant) {
+function getTreeStyle(variant: TreeVariant) {
   switch (variant) {
     case 'blueprint':
-      return { showHatching: false, showGround: true, leafLengthMult: 1, trunkStrokeBase: 1.5, branchStrokeBase: 1, leafStrokeBase: 0.9 };
+      return {
+        showHatching: false,
+        showGround: true,
+        leafLengthMult: 1,
+        trunkStrokeBase: 1.5,
+        branchStrokeBase: 1,
+        leafStrokeBase: 0.9,
+      };
     case 'minimal':
-      return { showHatching: false, showGround: false, leafLengthMult: 0.85, trunkStrokeBase: 2, branchStrokeBase: 1.1, leafStrokeBase: 1 };
+      return {
+        showHatching: false,
+        showGround: false,
+        leafLengthMult: 0.85,
+        trunkStrokeBase: 2,
+        branchStrokeBase: 1.1,
+        leafStrokeBase: 1,
+      };
     case 'botanical':
     default:
-      return { showHatching: true, showGround: true, leafLengthMult: 1, trunkStrokeBase: 2.4, branchStrokeBase: 1.2, leafStrokeBase: 1.05 };
+      return {
+        showHatching: true,
+        showGround: true,
+        leafLengthMult: 1,
+        trunkStrokeBase: 2.4,
+        branchStrokeBase: 1.2,
+        leafStrokeBase: 1.05,
+      };
   }
 }
 
-export function TreeOfKnowledge({ active, setActive, hovered, setHovered, variant = 'botanical' }) {
+export type TreeOfKnowledgeProps = {
+  active: string | null;
+  setActive: (id: string | null) => void;
+  hovered: string | null;
+  setHovered: (id: string | null) => void;
+  variant?: TreeVariant;
+};
+
+export function TreeOfKnowledge({
+  active,
+  setActive,
+  hovered,
+  setHovered,
+  variant = 'botanical',
+}: TreeOfKnowledgeProps) {
   const style = getTreeStyle(variant);
   const isInteracting = hovered != null || active != null;
 
-  const onKeyDown = (e, branchId, idx) => {
+  const onKeyDown = (e: KeyboardEvent, branchId: string, idx: number) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       setActive(branchId);
@@ -92,10 +132,10 @@ export function TreeOfKnowledge({ active, setActive, hovered, setHovered, varian
         {style.showHatching && (
           <g opacity="0.55">
             {TRUNK_HATCH_LEFT.map((d, i) => (
-              <path key={'hl' + i} d={d} className="ink-line" strokeWidth={0.7} />
+              <path key={`hl${i}`} d={d} className="ink-line" strokeWidth={0.7} />
             ))}
             {TRUNK_HATCH_RIGHT.map((d, i) => (
-              <path key={'hr' + i} d={d} className="ink-line" strokeWidth={0.7} />
+              <path key={`hr${i}`} d={d} className="ink-line" strokeWidth={0.7} />
             ))}
           </g>
         )}
@@ -126,7 +166,12 @@ export function TreeOfKnowledge({ active, setActive, hovered, setHovered, varian
                 <path key={i} d={t} className="ink-line" strokeWidth={style.branchStrokeBase * 0.65} />
               ))}
               {b.leaves.map(([cx, cy, ang, len, plump], i) => (
-                <path key={i} d={leafPath(cx, cy, ang, len * style.leafLengthMult, plump)} className="leaf" strokeWidth={style.leafStrokeBase} />
+                <path
+                  key={i}
+                  d={leafPath(cx, cy, ang, len * style.leafLengthMult, plump)}
+                  className="leaf"
+                  strokeWidth={style.leafStrokeBase}
+                />
               ))}
               <text x={b.label.x} y={b.label.y} textAnchor={b.label.anchor} className="label-text">
                 {b.name}
