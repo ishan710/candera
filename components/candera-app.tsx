@@ -292,14 +292,17 @@ function About() {
         </div>
         <div>
           <p>
-            We&apos;ve spent years doing AI work inside real companies—shipping, breaking, and
-            fixing systems people rely on, not just talking about them. Candera grew out of too many
-            conversations where a smaller team was steered toward software or scopes that
-            didn&apos;t match how they actually run.
+            We&apos;re a small team in New York. We&apos;ve spent years building AI into real
+            businesses—tools customers use, not demos—so we care a lot about what actually lands for
+            a small shop.
           </p>
           <p>
-            The playbooks and office hours stay free. If you need more than that, we&apos;re easy to
-            reach.
+            Candera exists because we kept seeing good operators sold big AI packages that didn&apos;t
+            match the problem they walked in with—we wanted a quieter way to help: clear writing, open
+            office hours, and paid work only when it fits.
+          </p>
+          <p>
+            Playbooks and office hours stay free. If you want to go further, email us.
           </p>
         </div>
       </div>
