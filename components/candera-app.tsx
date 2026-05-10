@@ -292,13 +292,14 @@ function About() {
         </div>
         <div>
           <p>
-            Built by people who&apos;ve shipped AI at Palantir, Anthropic, xAI, and a few startups in between.
-            We got tired of watching small businesses get sold tools they didn&apos;t need.
-            So we started this.
+            We&apos;ve spent years doing AI work inside real companies—shipping, breaking, and
+            fixing systems people rely on, not just talking about them. Candera grew out of too many
+            conversations where a smaller team was steered toward software or scopes that
+            didn&apos;t match how they actually run.
           </p>
           <p>
-            Everything we publish is free. The playbooks are free. The office hours are free.
-            If you need more than that, we can talk.
+            The playbooks and office hours stay free. If you need more than that, we&apos;re easy to
+            reach.
           </p>
         </div>
       </div>
