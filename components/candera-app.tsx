@@ -1,33 +1,7 @@
 'use client';
 
+import Link from 'next/link';
 import { GET_IN_TOUCH_MAILTO } from '@/lib/contact';
-
-const OFFERINGS = [
-  {
-    title: 'AI strategy',
-    desc: 'Figure out where AI helps your business—and where it does not.',
-  },
-  {
-    title: 'Education',
-    desc: 'Workshops and seminars on how AI systems work, without hype.',
-  },
-  {
-    title: 'Custom development',
-    desc: 'Short builds when nothing off the shelf fits.',
-  },
-  {
-    title: 'Playbooks',
-    desc: 'Free written guides on models, testing, and practical setup.',
-  },
-  {
-    title: 'Design review',
-    desc: 'Written feedback on AI features in your product.',
-  },
-  {
-    title: 'Hiring help',
-    desc: 'Support interviewing and onboarding early AI hires.',
-  },
-] as const;
 
 function Header() {
   return (
@@ -36,7 +10,8 @@ function Header() {
         Candera
       </a>
       <nav aria-label="primary">
-        <a href="#what">What we do</a>
+        <Link href="/personal">Personal</Link>
+        <Link href="/enterprise">Enterprise</Link>
         <a href="#office-hours">Office hours</a>
         <a href={GET_IN_TOUCH_MAILTO}>Get in touch</a>
       </nav>
@@ -58,20 +33,39 @@ function Hero() {
   );
 }
 
-function WhatWeDo() {
+function Services() {
   return (
-    <section className="practice" id="what">
+    <section className="services" id="services">
       <div className="section-head">
-        <span className="eyebrow">What we do</span>
-        <h2>Practical help. <em>No tool pitch.</em></h2>
+        <span className="eyebrow">Services</span>
+        <h2>
+          Two tracks. <em>One goal.</em>
+        </h2>
       </div>
-      <div className="practice-grid">
-        {OFFERINGS.map((item) => (
-          <div className="item" key={item.title}>
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
+      <div className="tier-grid">
+        <Link className="tier-card" href="/personal">
+          <div className="tier-card-top">
+            <span className="eyebrow">Personal</span>
+            <span className="tier-price-range">$50 – $149</span>
           </div>
-        ))}
+          <h3 className="tier-title">For individuals</h3>
+          <p className="tier-desc">
+            Students, professionals, families, and friends. Life and career sessions via Zoom.
+          </p>
+          <span className="tier-cta">See personal services →</span>
+        </Link>
+
+        <Link className="tier-card tier-card--enterprise" href="/enterprise">
+          <div className="tier-card-top">
+            <span className="eyebrow">Enterprise</span>
+            <span className="tier-price-range">$750 – $1,500</span>
+          </div>
+          <h3 className="tier-title">For founders & small businesses</h3>
+          <p className="tier-desc">
+            Structured sprints with clear deliverables — not retainers, not vague consulting.
+          </p>
+          <span className="tier-cta">See enterprise services →</span>
+        </Link>
       </div>
     </section>
   );
@@ -146,7 +140,7 @@ export default function CanderaApp() {
     <div className="page">
       <Header />
       <Hero />
-      <WhatWeDo />
+      <Services />
       <OfficeHours />
       <About />
       <Footer />
