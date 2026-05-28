@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import {
+  Raleway,
   Newsreader,
   Inter,
   JetBrains_Mono,
@@ -12,6 +13,13 @@ import {
   Figtree,
 } from 'next/font/google';
 import './globals.css';
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-raleway',
+  display: 'swap',
+});
 
 const newsreader = Newsreader({
   subsets: ['latin'],
@@ -88,6 +96,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const fontVars = [
+    raleway.variable,
     newsreader.variable,
     inter.variable,
     jetbrainsMono.variable,
