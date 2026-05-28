@@ -2,11 +2,14 @@ import type { Metadata } from 'next';
 import { ENTERPRISE_SERVICES } from '@/lib/services';
 import {
   ServiceNav,
+  ServicePageHero,
+  EnterpriseServiceGrid,
   EnterpriseServiceCard,
   HowItWorksSection,
   SessionAndAvailability,
   ServiceFooter,
 } from '@/components/service-page';
+import { StaggerItem } from '@/components/motion-ui';
 
 export const metadata: Metadata = {
   title: 'Enterprise — Candera',
@@ -16,24 +19,26 @@ export const metadata: Metadata = {
 
 export default function EnterprisePage() {
   return (
-    <div className="page">
+    <div className="page page--home page--enterprise">
       <ServiceNav active="enterprise" />
 
-      <section className="svc-page-hero">
-        <span className="eyebrow">Enterprise</span>
-        <h1>
-          AI for your <span className="highlight highlight-green">business.</span>
-        </h1>
-        <p className="lede">For founders and small businesses.</p>
-      </section>
+      <ServicePageHero
+        eyebrow="Enterprise"
+        title={
+          <>
+            AI for your <span className="highlight highlight-green">business.</span>
+          </>
+        }
+        lede="For founders and small businesses."
+      />
 
-      <section className="svc-enterprise-section">
-        <div className="svc-enterprise-grid">
-          {ENTERPRISE_SERVICES.map((svc) => (
-            <EnterpriseServiceCard key={svc.id} service={svc} />
-          ))}
-        </div>
-      </section>
+      <EnterpriseServiceGrid>
+        {ENTERPRISE_SERVICES.map((svc) => (
+          <StaggerItem key={svc.id}>
+            <EnterpriseServiceCard service={svc} />
+          </StaggerItem>
+        ))}
+      </EnterpriseServiceGrid>
 
       <HowItWorksSection />
       <SessionAndAvailability />
