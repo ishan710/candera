@@ -38,7 +38,7 @@ This section documents the visual and code conventions used across the site. Fol
 
 - Pages live at `app/<route>/page.jsx` or `.tsx` (Next.js App Router)
 - Interactive components use `'use client'` at the top and live in `components/`
-- Shared data and copy live in `components/data.js` — add new content there, not inline
+- Shared data and copy live in `components/data.ts` when needed — homepage copy is mostly inline in `components/candera-app.tsx`
 - Static assets (favicon, robots.txt) live in `public/`
 
 ### CSS design tokens (defined in `app/globals.css`)
@@ -76,7 +76,7 @@ Class `.eyebrow`: mono, 11px, 0.12em letter-spacing, uppercase, `--ink-2`.
 </div>
 ```
 
-**Section numbering** uses `§ I`, `§ II`, etc. in the eyebrow. New sections continue the sequence. As of May 2026: I=Built for, II=Practice, III=Playbooks, IV=Office Hours, V=About, VI=Resources.
+Homepage sections (May 2026): hero → What we do → Office hours → About. Only `/` and `/agent` are public routes; `/personal`, `/enterprise`, and `/resources` redirect to `/`.
 
 ### Layout conventions
 
