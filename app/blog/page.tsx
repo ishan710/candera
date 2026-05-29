@@ -4,7 +4,7 @@ import { BlogIndexPage } from '@/components/blog-page';
 
 export const metadata: Metadata = {
   title: 'Blog — Candera',
-  description: 'Free AI tools, checklists, and practical tips for small businesses and individuals.',
+  description: 'Guides, checklists, and short notes on practical AI use for small businesses.',
 };
 
 export default function BlogPage() {

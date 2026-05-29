@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: 'Personal — Candera',
   description:
-    'AI sessions for individuals — students, professionals, families, and friends. Life and career packages from $50.',
+    'One-on-one AI sessions for individuals. Life, learning, and career engagements with defined deliverables.',
 };
 
 export default function PersonalPage() {
@@ -25,19 +25,19 @@ export default function PersonalPage() {
         eyebrow="Personal"
         title={
           <>
-            AI for your <span className="highlight highlight-green">everyday life.</span>
+            Personal <span className="highlight highlight-green">advisory.</span>
           </>
         }
-        lede="For individuals — students, professionals, families, and friends."
+        lede="One-on-one sessions for students, professionals, and families. Scoped work with a written deliverable."
       />
 
-      <ServiceCategory id="life" eyebrow="Life" title="AI in your daily routine." layout="list">
+      <ServiceCategory id="life" eyebrow="Life" title="Daily use." layout="list">
         {PERSONAL_LIFE.map((s) => (
           <PersonalServiceRow key={s.id} service={s} />
         ))}
       </ServiceCategory>
 
-      <ServiceCategory id="career" eyebrow="Career" title="AI for your next move." layout="list">
+      <ServiceCategory id="career" eyebrow="Career" title="Career change and job search." layout="list">
         {PERSONAL_CAREER.map((s) => (
           <PersonalServiceRow key={s.id} service={s} />
         ))}

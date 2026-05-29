@@ -14,7 +14,7 @@ import { StaggerItem } from '@/components/motion-ui';
 export const metadata: Metadata = {
   title: 'Enterprise — Candera',
   description:
-    'AI strategy and build engagements for founders and small businesses. Sprints from $750.',
+    'Fixed-scope AI engagements for founders and small businesses. Strategy, positioning, and workflow projects.',
 };
 
 export default function EnterprisePage() {
@@ -26,10 +26,10 @@ export default function EnterprisePage() {
         eyebrow="Enterprise"
         title={
           <>
-            AI for your <span className="highlight highlight-green">business.</span>
+            Business <span className="highlight highlight-green">engagements.</span>
           </>
         }
-        lede="For founders and small businesses."
+        lede="Two- and three-week projects for founders and small teams. Scope and deliverable agreed before work begins."
       />
 
       <EnterpriseServiceGrid>

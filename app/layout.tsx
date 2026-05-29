@@ -89,9 +89,9 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: 'Candera — Applied AI for everyone else.',
+  title: 'Candera — AI advisory',
   description:
-    'Candera is an advisory firm helping small businesses use AI well. Free playbooks, open office hours.',
+    'Candera advises individuals and small businesses on practical AI use. Fixed-scope engagements and free guides.',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

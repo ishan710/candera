@@ -45,13 +45,13 @@ export function BlogIndexPage({
         </FadeUp>
         <FadeUp delay={0.08}>
           <h1>
-            Free tools and <span className="highlight highlight-green">tips.</span>
+            Guides and <span className="highlight highlight-green">worksheets.</span>
           </h1>
         </FadeUp>
         <FadeUp delay={0.14}>
           <p className="lede">
-            Checklists, templates, and short guides for small businesses and individuals. No signup,
-            no paywall.
+            Written for owners and operators. Short enough to use in a meeting; specific enough to
+            act on the same week.
           </p>
         </FadeUp>
       </section>
@@ -60,7 +60,7 @@ export function BlogIndexPage({
         <FadeUp onView>
           <div className="svc-category-head">
             <span className="eyebrow">Tools</span>
-            <h2>Take these into your week.</h2>
+            <h2>Worksheets and checklists.</h2>
           </div>
         </FadeUp>
         <FadeUp onView delay={0.06}>
@@ -72,7 +72,7 @@ export function BlogIndexPage({
         <FadeUp onView>
           <div className="svc-category-head">
             <span className="eyebrow">Tips</span>
-            <h2>Short reads that age well.</h2>
+            <h2>Notes from the field.</h2>
           </div>
         </FadeUp>
         <FadeUp onView delay={0.06}>
@@ -97,7 +97,7 @@ export function BlogArticlePage({ entry }: { entry: BlogEntry }) {
           </Link>
         </FadeUp>
         <FadeUp delay={0.06}>
-          <span className="eyebrow">{entry.category === 'tool' ? 'Tool' : 'Tip'}</span>
+          <span className="eyebrow">{entry.category === 'tool' ? 'Worksheet' : 'Note'}</span>
           <span className="blog-entry-label blog-entry-label--hero">{entry.label}</span>
           <h1 className="blog-article-title">{entry.title}</h1>
           {entry.date ? <p className="svc-row-schedule">{entry.date}</p> : null}

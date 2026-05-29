@@ -113,7 +113,7 @@ export function PersonalServiceRow({ service }: { service: PersonalService }) {
         <p className="svc-row-schedule">{service.schedule}</p>
         <p className="svc-row-desc">{service.description}</p>
         <p className="svc-row-outcome">
-          <span className="svc-row-outcome-label">You get</span> {service.deliverable}
+          <span className="svc-row-outcome-label">Includes</span> {service.deliverable}
         </p>
       </div>
       <a className="svc-row-book" href={bookServiceMailto(service.title)}>
@@ -130,7 +130,7 @@ export function EnterpriseServiceCard({ service }: { service: EnterpriseService 
         <h3 className="svc-detail-title">{service.title}</h3>
         <span className="svc-detail-price">{service.price}</span>
       </div>
-      <p className="svc-schedule-tag">Schedule: {service.schedule}</p>
+      <p className="svc-schedule-tag">{service.schedule}</p>
       <div className="svc-weeks-table" role="table" aria-label={`${service.title} timeline`}>
         <div className="svc-week-row" role="row" style={{ background: 'var(--paper-2)' }}>
           <span className="svc-week-label eyebrow" role="columnheader">
@@ -148,7 +148,7 @@ export function EnterpriseServiceCard({ service }: { service: EnterpriseService 
         ))}
       </div>
       <div className="svc-deliverable">
-        <span className="eyebrow">Deliverable</span>
+        <span className="eyebrow">Includes</span>
         <span>{service.deliverable}</span>
       </div>
       <a className="svc-cta" href={bookServiceMailto(service.title)}>
@@ -165,7 +165,7 @@ export function HowItWorksSection() {
         <div className="section-head">
           <span className="eyebrow">How it works</span>
           <h2>
-            Structured. <em>Predictable.</em>
+            How engagements run.
           </h2>
         </div>
       </FadeUp>

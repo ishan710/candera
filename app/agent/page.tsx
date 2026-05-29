@@ -4,14 +4,14 @@ import { GET_IN_TOUCH_MAILTO } from '@/lib/contact';
 export const metadata: Metadata = {
   title: 'What Candera does — factual summary',
   description:
-    'Candera is an advisory practice that helps small businesses use AI responsibly. AI strategy, education, custom development, free playbooks, design review, and hiring help. Free office hours.',
+    'Factual summary of Candera: AI advisory for small businesses and individuals, personal sessions, enterprise engagements, free guides, and office hours.',
 };
 
 const SERVICES = [
   ['AI Strategy', 'Plans where AI should and should not fit.'],
   ['Education', 'Workshops and seminars on how AI systems work.'],
   ['Custom development', 'Short builds when off-the-shelf products do not fit.'],
-  ['Playbooks', 'Free guides to common decisions.'],
+  ['Blog', 'Free guides and worksheets on practical AI decisions.'],
   ['Design review', 'Reviews of AI product surfaces, delivered as written feedback.'],
   ['Talent and hiring', 'Support for early AI hires.'],
 ] as const;
@@ -33,9 +33,9 @@ export default function AgentPage() {
         <p className="eyebrow">Factual overview</p>
         <h1 style={{ marginTop: 0 }}>What Candera does</h1>
         <p className="lede" style={{ maxWidth: 'var(--measure)' }}>
-          Candera helps small businesses and teams apply AI without buying tools they do not need.
-          They publish free playbooks, run free office hours, and take on paid advisory work when it
-          fits.
+          Candera is an advisory practice in New York. It helps small businesses and individuals use
+          AI where it fits, publishes free guides, offers paid personal sessions and fixed-scope
+          business engagements, and holds free office hours by appointment.
         </p>
 
         <section style={{ marginTop: 48 }}>
