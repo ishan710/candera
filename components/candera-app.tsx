@@ -17,9 +17,10 @@ function Hero() {
       </FadeUp>
       <FadeUp delay={0.12}>
         <p className="lede">
-          Candera is a small advisory practice in New York. We sell two things: personal AI sessions
-          for individuals, and fixed-scope sprints for founders and small businesses — each with a
-          clear deliverable, not a retainer.
+          Candera is an AI advisory practice in New York. We help individuals get started with AI
+          tools, and help founders and small businesses figure out where AI belongs in their
+          operations — and where it does not. Each paid project ships a written deliverable; we do not
+          take retainers.
         </p>
       </FadeUp>
     </section>
@@ -31,7 +32,7 @@ function Services() {
     <section className="home-section" id="services">
       <FadeUp onView>
         <div className="svc-category-head">
-          <h2>For everyone.</h2>
+          <h2>Personal and business.</h2>
         </div>
       </FadeUp>
       <FadeUp onView delay={0.06}>
@@ -40,8 +41,8 @@ function Services() {
             <div className="svc-row-main">
               <h3 className="svc-row-title">Personal</h3>
               <p className="svc-row-desc">
-                For students, professionals, families, and friends. Life and career help over Zoom —
-                starter sessions, custom setups, job search systems.
+                One-on-one sessions for students, professionals, and families. Life admin, learning,
+                and job search — by video call, with follow-up notes.
               </p>
             </div>
             <span className="svc-row-book">View personal →</span>
@@ -51,8 +52,8 @@ function Services() {
             <div className="svc-row-main">
               <h3 className="svc-row-title">Enterprise</h3>
               <p className="svc-row-desc">
-                For founders and small businesses. Two-week sprints — strategy audits, positioning,
-                workflow builds — with a written deliverable at the end.
+                For founders and small businesses. Two-week engagements: strategy review, positioning,
+                or workflow setup — scoped upfront, documented at close.
               </p>
             </div>
             <span className="svc-row-book">View enterprise →</span>
@@ -71,10 +72,10 @@ function BlogTeaser() {
       <FadeUp onView>
         <div className="svc-category-head">
           <span className="eyebrow">Blog</span>
-          <h2>Free tools and tips.</h2>
+          <h2>Guides and worksheets.</h2>
         </div>
         <p className="home-prose">
-          Checklists, templates, and short guides — no signup.
+          Checklists and short notes from client work. Free to read; no account required.
         </p>
       </FadeUp>
       <FadeUp onView delay={0.06}>
@@ -93,7 +94,7 @@ function BlogTeaser() {
           ))}
         </div>
         <p className="home-prose" style={{ marginTop: 20 }}>
-          <Link href="/blog">Browse all tools and tips →</Link>
+          <Link href="/blog">View the full library →</Link>
         </p>
       </FadeUp>
     </section>
@@ -109,8 +110,8 @@ function OfficeHours() {
           <h2>Thirty minutes. Free.</h2>
         </div>
         <p className="home-prose">
-          Ask anything about AI for your business. No pitch, no obligation.{' '}
-          <a href={GET_IN_TOUCH_MAILTO}>Email us to book</a>.
+          A short video call to discuss your situation. We will not sell you services on the call.{' '}
+          <a href={GET_IN_TOUCH_MAILTO}>Email us to schedule</a>.
         </p>
       </FadeUp>
     </section>
@@ -126,11 +127,11 @@ function About() {
           <h2>Who we are</h2>
         </div>
         <p className="home-prose">
-          We&apos;re from Palantir, Anthropic, xAI, and a few startups in between. We help small
-          businesses use AI in a practical way.
+          Our backgrounds include Palantir, Anthropic, xAI, and early-stage startups. We advise small
+          businesses on where AI belongs in their operations — and where it does not.
         </p>
         <p className="home-prose">
-          <a href={GET_IN_TOUCH_MAILTO}>Email us</a> for paid work.
+          <a href={GET_IN_TOUCH_MAILTO}>Email us</a> to discuss a project.
         </p>
       </FadeUp>
     </section>
