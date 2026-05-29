@@ -194,6 +194,38 @@ export const BLOG_ENTRIES: BlogEntry[] = [
       'Review quarterly for tools you marked "keep." A tool that paid for itself in January may be redundant by April if a better option launched or your workflow changed.',
     ],
   },
+  {
+    slug: 'diy-first-ai-setup',
+    category: 'tool',
+    title: 'Set up your first AI workflow in one hour',
+    summary: 'A step-by-step guide to go from zero to using AI in your work — no help required.',
+    label: 'Guide',
+    paragraphs: [
+      'This works for email, summarizing documents, drafting proposals, or any repeated writing task. Pick one before you start.',
+      'Step 1 — Sign up. Go to claude.ai or chat.openai.com and create a free account. Both have free tiers that are sufficient for this guide.',
+      'Step 2 — Write your first prompt using three parts: role ("You are a professional email writer"), task ("Draft a reply to the message below"), and format ("Keep it under 100 words, professional tone, no filler phrases"). Paste your actual content below the instruction.',
+      'Step 3 — Run it three times on real examples. Note which outputs need editing and what is consistently wrong. That pattern tells you how to adjust the instruction.',
+      'Step 4 — Save the prompt. Paste it into a Notes file, a Notion page, or a shared doc. Name it by task. A prompt you cannot find is a prompt you will not use.',
+      'Step 5 — Use it for five working days. Do not evaluate it after one attempt. Judgment requires repetition.',
+      'Step 6 — On day five, answer: did this save time? Did the quality hold up? If yes, keep it and add one more task. If no, bring the failing examples here and we can help diagnose in a free office hours call.',
+    ],
+  },
+  {
+    slug: 'resources-podcasts-courses',
+    category: 'tip',
+    title: 'Podcasts and courses worth your time',
+    summary: 'Curated by audience — whether you are just starting or already building.',
+    label: 'Note',
+    date: 'May 2026',
+    paragraphs: [
+      'If you are just starting: Hard Fork (New York Times, Kevin Roose and Casey Newton) covers AI news without assuming technical background. Elements of AI from the University of Helsinki is free, browser-based, requires no coding, and over 1.8 million people have completed it. Google AI Essentials on Coursera is the fastest structured introduction; it is free to audit.',
+      'If you want daily coverage: Everyday AI (hosted by Jordan Wilson) runs Monday through Friday and focuses on practical business applications. The AI Daily Brief is a fifteen-minute news summary suited to anyone who wants to stay current without committing to a long show.',
+      'If you are building or managing a team that builds: Latent Space is the most respected podcast for AI engineers — it covers foundation models, agents, infrastructure, and code generation at depth. Practical AI (Changelog Network) bridges the gap between engineering and business, and is the best show for non-engineers who work alongside technical teams.',
+      'If you want long-form thinking: The Lex Fridman Podcast runs two to four hours per episode and covers AI research, philosophy, and science with researchers and founders. Not suited for daily commutes but useful for travel days.',
+      'Free courses worth completing: AI For Everyone by Andrew Ng (DeepLearning.AI, Coursera) is the most widely recommended non-technical introduction — four weeks, free to audit. Anthropic publishes a free course library at anthropic.com/learn that covers prompt engineering through to production deployments. IBM AI Foundations for Everyone on Coursera requires no coding background and covers machine learning, neural networks, and NLP at a conceptual level.',
+      'One rule: finish one thing before starting another. Most people who "tried a course" opened three and finished none.',
+    ],
+  },
 ];
 
 export const BLOG_TOOLS = BLOG_ENTRIES.filter((e) => e.category === 'tool');
