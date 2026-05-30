@@ -28,7 +28,7 @@ export default function PersonalPage() {
             Personal <span className="highlight highlight-green">advisory.</span>
           </>
         }
-        lede="One-on-one sessions for students, professionals, and families. Scoped work with a written deliverable."
+        lede="Two-day intensives for individuals. Day 1 is strategy and scoping; Day 2 is build and handoff."
       />
 
       <ServiceCategory id="life" eyebrow="Life" title="Daily use." layout="list">

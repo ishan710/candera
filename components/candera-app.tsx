@@ -17,10 +17,9 @@ function Hero() {
       </FadeUp>
       <FadeUp delay={0.12}>
         <p className="lede">
-          Candera is an AI advisory practice in New York. We help individuals get started with AI
-          tools, and help founders and small businesses figure out where AI belongs in their
-          operations — and where it does not. Each paid project ships a written deliverable; we do not
-          take retainers.
+          Candera is an AI advisory practice in New York. We run two-day intensives for individuals
+          and businesses — strategy and build, done in 48 hours, with a written deliverable at the
+          end. No retainers.
         </p>
       </FadeUp>
     </section>
@@ -41,8 +40,8 @@ function Services() {
             <div className="svc-row-main">
               <h3 className="svc-row-title">Personal</h3>
               <p className="svc-row-desc">
-                One-on-one sessions for students, professionals, and families. Life admin, learning,
-                and job search — by video call, with follow-up notes.
+                Two-day intensives for individuals — AI setup, career tools, and job search systems.
+                Day 1 is strategy; Day 2 is build and handoff. From $299.
               </p>
             </div>
             <span className="svc-row-book">View personal →</span>
@@ -52,8 +51,8 @@ function Services() {
             <div className="svc-row-main">
               <h3 className="svc-row-title">Enterprise</h3>
               <p className="svc-row-desc">
-                For founders and small businesses. Two-week engagements: strategy review, positioning,
-                or workflow setup — scoped upfront, documented at close.
+                Two-day intensives for founders and small teams — AI audit, brand positioning, or a
+                full founder build. Everything scoped and delivered in 48 hours. From $2,500.
               </p>
             </div>
             <span className="svc-row-book">View enterprise →</span>
@@ -110,7 +109,8 @@ function OfficeHours() {
           <h2>Thirty minutes. Free.</h2>
         </div>
         <p className="home-prose">
-          A short video call to discuss your situation. We will not sell you services on the call.{' '}
+          A free 30-minute call before you book. We'll confirm whether a 2-day intensive is the
+          right fit and which one makes sense.{' '}
           <a href={GET_IN_TOUCH_MAILTO}>Email us to schedule</a>.
         </p>
       </FadeUp>

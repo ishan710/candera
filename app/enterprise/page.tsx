@@ -29,7 +29,7 @@ export default function EnterprisePage() {
             Business <span className="highlight highlight-green">engagements.</span>
           </>
         }
-        lede="Two- and three-week projects for founders and small teams. Scope and deliverable agreed before work begins."
+        lede="Two-day intensives for founders and small teams. Scope and deliverable agreed before Day 1 begins."
       />
 
       <EnterpriseServiceGrid>
