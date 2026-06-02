@@ -17,8 +17,8 @@ function Hero() {
       </FadeUp>
       <FadeUp delay={0.12}>
         <p className="lede">
-          Candera is an AI advisory practice in New York. We run two-day intensives for individuals
-          and businesses — strategy and build, done in 48 hours, with a written deliverable at the
+          Candera is an AI advisory practice in New York. We run two-day intensives for
+          individuals — strategy and build, done in 48 hours, with a written deliverable at the
           end. No retainers.
         </p>
       </FadeUp>
@@ -31,7 +31,7 @@ function Services() {
     <section className="home-section" id="services">
       <FadeUp onView>
         <div className="svc-category-head">
-          <h2>Personal and business.</h2>
+          <h2>What we offer.</h2>
         </div>
       </FadeUp>
       <FadeUp onView delay={0.06}>
@@ -47,16 +47,6 @@ function Services() {
             <span className="svc-row-book">View personal →</span>
           </Link>
 
-          <Link href="/enterprise" className="svc-row svc-row--link">
-            <div className="svc-row-main">
-              <h3 className="svc-row-title">Enterprise</h3>
-              <p className="svc-row-desc">
-                Two-day intensives for founders and small teams — AI audit, brand positioning, or a
-                full founder build. Everything scoped and delivered in 48 hours. From $2,500.
-              </p>
-            </div>
-            <span className="svc-row-book">View enterprise →</span>
-          </Link>
         </div>
       </FadeUp>
     </section>

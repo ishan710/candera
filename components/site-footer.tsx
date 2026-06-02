@@ -8,7 +8,6 @@ export function SiteFooter() {
       <div className="dd-footer-col">
         <span className="dd-footer-label">Services</span>
         <Link href="/personal">Personal</Link>
-        <Link href="/enterprise">Enterprise</Link>
         <Link href="/blog">Blog</Link>
         <a href="/#office-hours">Office hours</a>
       </div>

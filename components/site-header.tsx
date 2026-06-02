@@ -7,7 +7,7 @@ import { FadeUp } from '@/components/motion-ui';
 export function SiteHeader({
   active,
 }: {
-  active?: 'home' | 'personal' | 'enterprise' | 'blog';
+  active?: 'home' | 'personal' | 'blog';
 }) {
   return (
     <FadeUp>
@@ -21,9 +21,6 @@ export function SiteHeader({
           </Link>
           <Link href="/personal" aria-current={active === 'personal' ? 'page' : undefined}>
             Personal
-          </Link>
-          <Link href="/enterprise" aria-current={active === 'enterprise' ? 'page' : undefined}>
-            Enterprise
           </Link>
           <Link href="/blog" aria-current={active === 'blog' ? 'page' : undefined}>
             Blog
